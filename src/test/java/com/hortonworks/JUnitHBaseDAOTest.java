@@ -29,9 +29,11 @@ import static org.junit.Assert.*;
 import org.junit.Ignore;
 
 /**
- *
  * @author aervits
+ *
+ * These tests ensure that your createPut method creates, populates, and returns a Put object with expected values. 
  */
+
 public class JUnitHBaseDAOTest {
 
     private static final Logger LOG = Logger.getLogger(JUnitHBaseDAOTest.class.getName());
@@ -71,8 +73,6 @@ public class JUnitHBaseDAOTest {
         fail("The test case is a prototype.");
     }
 
-    // Junit Unit Test
-    // These tests ensure that your createPut method creates, populates, and returns a Put object with expected values. 
     @Test
     public void testCreatePut() throws Exception {
         HBaseTestObj obj = new HBaseTestObj("testKey", "testValue");

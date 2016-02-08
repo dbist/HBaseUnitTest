@@ -42,6 +42,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 /**
  * @author aervits
+ * 
 You can use Mockito to do unit testing on smaller units. 
 For instance, you can mock a org.apache.hadoop.hbase.Server instance 
 or a org.apache.hadoop.hbase.master.MasterServices interface reference 

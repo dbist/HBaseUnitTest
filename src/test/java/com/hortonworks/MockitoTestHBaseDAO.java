@@ -49,15 +49,15 @@ or a org.apache.hadoop.hbase.master.MasterServices interface reference
 rather than a full-blown org.apache.hadoop.hbase.master.HMaster.
 */
 @RunWith(MockitoJUnitRunner.class)
-public class MockitoHBaseDAOTest {
+public class MockitoTestHBaseDAO {
 
-    private static final Logger LOG = Logger.getLogger(MockitoHBaseDAOTest.class.getName());
+    private static final Logger LOG = Logger.getLogger(MockitoTestHBaseDAO.class.getName());
 
-    public MockitoHBaseDAOTest() {
+    public MockitoTestHBaseDAO() {
         try {
             this.connection = ConnectionFactory.createConnection(config);
         } catch (IOException ex) {
-            Logger.getLogger(MockitoHBaseDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MockitoTestHBaseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

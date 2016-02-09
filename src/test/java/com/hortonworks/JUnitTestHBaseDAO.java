@@ -34,11 +34,11 @@ import org.junit.Ignore;
  * These tests ensure that your createPut method creates, populates, and returns a Put object with expected values. 
  */
 
-public class JUnitHBaseDAOTest {
+public class JUnitTestHBaseDAO {
 
-    private static final Logger LOG = Logger.getLogger(JUnitHBaseDAOTest.class.getName());
+    private static final Logger LOG = Logger.getLogger(JUnitTestHBaseDAO.class.getName());
 
-    public JUnitHBaseDAOTest() {
+    public JUnitTestHBaseDAO() {
     }
 
     @BeforeClass

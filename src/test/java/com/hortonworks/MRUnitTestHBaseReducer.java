@@ -34,7 +34,7 @@ import org.junit.Test;
  *
  * @author aervits
  */
-public class MRUnitHBaseReducerTest {
+public class MRUnitTestHBaseReducer {
 
     /**
      * MRUnit includes a MapperDriver to test mapping jobs, and you can use MRUnit to test other operations, including reading from HBase, processing data, or writing to HDFS

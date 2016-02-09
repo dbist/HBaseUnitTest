@@ -25,6 +25,7 @@ import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.mrunit.ReduceDriver;
+import org.apache.hadoop.mrunit.types.Pair;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,41 +36,47 @@ import org.junit.Test;
  */
 public class MRUnitHBaseReducerTest {
 
-    //TODO MRUnit 1.1.0 is old need more investigation
-    
-    ReduceDriver <Text, Text, ImmutableBytesWritable, Writable> reduceDriver;
-    byte[] CF = "CF".getBytes();
-    byte[] QUALIFIER = "CQ-1".getBytes();
+    /**
+     * MRUnit includes a MapperDriver to test mapping jobs, and you can use MRUnit to test other operations, including reading from HBase, processing data, or writing to HDFS
+     * TODO MRUnit 1.0.0 is old need more investigation, requires classifier hadoop2 in pom.
+     */
+    public class MyReducerTest {
 
-    @Before
-    public void setUp() {
-        MyReducer reducer = new MyReducer();
-        reduceDriver = ReduceDriver.newReduceDriver();
-    }
+        ReduceDriver<Text, Text, ImmutableBytesWritable, Writable> reduceDriver;
+        byte[] CF = "CF".getBytes();
+        byte[] QUALIFIER = "CQ-1".getBytes();
 
-    @Test
-    public void testHBaseInsert() throws IOException {
-        String strKey = "RowKey-1", strValue = "DATA", strValue1 = "DATA1",
-                strValue2 = "DATA2";
-        List<Text> list = new ArrayList<>();
-        list.add(new Text(strValue));
-        list.add(new Text(strValue1));
-        list.add(new Text(strValue2));
+        @Before
+        public void setUp() {
+            MyReducer reducer = new MyReducer();
+           
+          //  reduceDriver = ReduceDriver.newReduceDriver(reducer);
+        }
+
+        @Test
+        public void testHBaseInsert() throws IOException {
+            String strKey = "RowKey-1", strValue = "DATA", strValue1 = "DATA1",
+                    strValue2 = "DATA2";
+            List<Text> list = new ArrayList<Text>();
+            list.add(new Text(strValue));
+            list.add(new Text(strValue1));
+            list.add(new Text(strValue2));
       //since in our case all that the reducer is doing is appending the records that the mapper
-        //sends it, we should get the following back
-        String expectedOutput = strValue + strValue1 + strValue2;
+            //sends it, we should get the following back
+            String expectedOutput = strValue + strValue1 + strValue2;
      //Setup Input, mimic what mapper would have passed
-        //to the reducer and run test
-        reduceDriver.withInput(new Text(strKey), list);
-        //run the reducer and get its output
-        List<org.apache.hadoop.mrunit.types.Pair<ImmutableBytesWritable, Writable>> result = reduceDriver.run();
+            //to the reducer and run test
+            reduceDriver.withInput(new Text(strKey), list);
+            //run the reducer and get its output
+            List<Pair<ImmutableBytesWritable, Writable>> result = reduceDriver.run();
 
-        //extract key from result and verify
-        assertEquals(Bytes.toString(result.get(0).getFirst().get()), strKey);
+            //extract key from result and verify
+            assertEquals(Bytes.toString(result.get(0).getFirst().get()), strKey);
 
-        //extract value for CF/QUALIFIER and verify
-        Put a = (Put) result.get(0).getSecond();
-        String c = Bytes.toString(a.get(CF, QUALIFIER).get(0).getValue());
-        assertEquals(expectedOutput, c);
+            //extract value for CF/QUALIFIER and verify
+            Put a = (Put) result.get(0).getSecond();
+            String c = Bytes.toString(a.get(CF, QUALIFIER).get(0).getValue());
+            assertEquals(expectedOutput, c);
+        }
     }
 }

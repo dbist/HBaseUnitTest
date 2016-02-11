@@ -100,9 +100,9 @@ public class MockitoTestHBaseDAO {
 
         assertEquals(Bytes.toString(put.getRow()), obj.getRowKey());
         assert (put.has(Bytes.toBytes("CF"), Bytes.toBytes("CQ-1")));
-        assertEquals(Bytes.toString(put.get(Bytes.toBytes("CF"), Bytes.toBytes("CQ-1")).get(0).getValue()), "testValue");
+        assertEquals(Bytes.toString(put.get(Bytes.toBytes("CF"), Bytes.toBytes("CQ-1")).get(0).getValue()), obj.getValue());
         
         LOG.log(Level.INFO, obj.getRowKey());
-        LOG.log(Level.INFO, Bytes.toString(put.get(Bytes.toBytes("CF"), Bytes.toBytes("CQ-1")).get(0).getValue()), "testValue");
+        LOG.log(Level.INFO, Bytes.toString(put.get(Bytes.toBytes("CF"), Bytes.toBytes("CQ-1")).get(0).getValue()), obj.getValue());
     }
 }

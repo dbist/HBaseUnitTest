@@ -50,7 +50,7 @@ public class MRUnitTestHBaseReducer {
         public void setUp() {
             MyReducer reducer = new MyReducer();
            
-          //  reduceDriver = ReduceDriver.newReduceDriver(reducer);
+            //reduceDriver = ReduceDriver.newReduceDriver(reducer);
         }
 
         @Test
